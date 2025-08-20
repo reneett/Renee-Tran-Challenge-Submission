@@ -8,12 +8,12 @@
     <style>
         body {
             background-color: #2E083D;
+            color: white;
             font-family: Arial;
         }
 
         #navbar {
             background-color: #000;
-            color: white;
             position: fixed;
             display: block;
             margin: 0 0 1rem;
@@ -21,6 +21,7 @@
             left: 0;
             z-index: 100;
             width: 100%;
+            height: 58px;
         }
 
         #main-content {
@@ -31,19 +32,76 @@
         .container {
             display: flex;
             border-radius: 6px;
+            padding: 1rem;
             justify-content: center;
         }
 
         .stacked {
-            display: flex;
-            border-radius: 6px;
-            justify-content: center;
             flex-flow: column wrap;
         }
 
         img {
             max-width: 100%;
+            border-radius: 6px;
             height: auto;
+        }
+
+        h2 {
+            font-size: 32px;
+            margin-bottom: 1rem;
+            padding: 1rem;
+        }
+
+        div.card-holder {
+            padding: 0 15px;
+            margin: 0 auto;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        .cards {
+            display: grid;
+            grid-auto-columns: 100%;
+            grid-column-gap: 10px;
+            grid-auto-flow: column;
+            padding: 25px 0px;
+            list-style: none;
+            overflow-x: scroll;
+            scroll-snap-type: x mandatory;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            background: white;
+            border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 15%);
+            scroll-snap-align: start;
+            transition: all 0.2s;
+        }
+
+        .card .card-content {
+            margin: 20px 0;
+            max-width: 85%;
+        }
+
+        .cards::-webkit-scrollbar {
+            height: 12px;
+        }
+
+        .cards::-webkit-scrollbar-thumb,
+        .cards::-webkit-scrollbar-track {
+            border-radius: 92px;
+        }
+
+        .cards::-webkit-scrollbar-thumb {
+            background: var(--darkorange);
+        }
+
+        .cards::-webkit-scrollbar-track {
+            background: var(--thumb);
         }
     </style>
 </head>
@@ -56,20 +114,33 @@
         <div class="container">
             <picture>
                 <source media="(max-width:580px)" srcset="assets\2308_mobile_hero.jpg">
-                <img src="assets\2308_desktop_hero.jpg" style="width:auto;">
+                <img src="assets\2308_desktop_hero.jpg">
             </picture>
         </div>
-        
-        <h1>Now Playing</h1>
-        <div class="container">
-            <img src="assets\2308_01_now_playing.jpg">
-            <div class="container stacked">
-                <img src="assets\2308_02_now_playing.jpg">
-                <img src="assets\2308_03_now_playing.jpg">
+
+        <div>
+            <h2>Now Playing</h2>
+            <div class="container">
+                <img src="assets\2308_01_now_playing.jpg">
+                <div class="container stacked">
+                    <img src="assets\2308_02_now_playing.jpg">
+                    <img src="assets\2308_03_now_playing.jpg">
+                </div>
             </div>
         </div>
 
-        <h1>Now Playing</h1>
+        <div>
+            <h2>Tomorrow's Schedule</h2>
+            <div class="card-holder">
+                <ul class="cards">
+                    <li class="card">
+                        <div class="card-content">
+                                <p>haiii.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <script>
