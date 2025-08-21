@@ -87,8 +87,13 @@
             list-style: none;
             overflow-x: scroll;
             scroll-snap-type: x mandatory;
-            scrollbar-width: 12px;
-            scrollbar-color: linear-gradient(to right, #FF5C00, #CB2DF4) #0B0B0B;
+        }
+        /* firefox support for scrollbar */
+        @-moz-document url-prefix() {
+            .cards {
+                scrollbar-width: thin;
+                scrollbar-color: #CB2DF4 #0B0B0B;
+            }
         }
         .card {
             display: flex;
