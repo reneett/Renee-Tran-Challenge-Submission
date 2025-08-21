@@ -230,7 +230,6 @@
             date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
             date.setDate(date.getDate() + 1);
             var scheduleURL = 'https://api.tvmaze.com/schedule?country=US&date='+ date.toISOString().split('T')[0];
-            console.log(scheduleURL);
             //retrieve and extract image data, discarding null results
             $.ajax({
                 type: 'GET',
