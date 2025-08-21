@@ -68,6 +68,18 @@
         /* card styling referenced from https://webdesign.tutsplus.com/horizontal-scrolling-card-ui-flexbox-and-css-grid--cms-41922t */
         .card-holder {
             margin: 0 auto;
+            position: relative;
+        }
+        .card-holder::after {
+            content: "";
+            position: absolute;
+            width: 80px;
+            top: 0;
+            right: 0;
+            height: calc(100% - 12px);
+            transform: translateX(2px);
+            background: linear-gradient(to left, #2E083D 10%, rgba(189, 21, 255, 0));
+            pointer-events: none;
         }
         .cards {
             display: flex;
@@ -110,7 +122,6 @@
             justify-content: center;
             padding: 5px;
         }
-
         /* mobile screen */
         @media (max-width: 580px) {
             .navbar-items {
@@ -139,26 +150,20 @@
                 font-size: 28x;
             }
         }
-
         /* tablet screen */
         @media (min-width:581px) and (max-width: 1619px) {
-
             .navbar-items {
                 margin: auto 25px;
             }
-
             #main-content {
                 margin: 116px 25px;
             }
-
             .container {
                 gap: 15px;
             }
-
             .card {
                 flex-basis: calc(25% - 20px);
             }
-
             h2 {
                 font-size: 30px;
             }
@@ -198,7 +203,7 @@
             </div>
         <div>
             <h2>Tomorrow's Schedule</h2>
-            <div class="card-holder" style="mask-image: linear-gradient(to left, rgba(0, 0, 0, 0), #2E083D 10%)">
+            <div class="card-holder">
                 <ul class="cards">
                 </ul>
             </div>
@@ -209,14 +214,14 @@
     </footer>
     <script>
         $(document).ready(function() {
-            // get tomorrow's date and populate schedule
+            //get tomorrow's date and populate schedule
             var date = new Date();
-            // prevent offset from conversion to UTC time
+            //prevent offset from conversion to UTC time
             date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
             date.setDate(date.getDate() + 1);
             var scheduleURL = 'https://api.tvmaze.com/schedule?country=US&date='+ date.toISOString().split('T')[0];
             console.log(scheduleURL);
-            // retrieve and extract image data, discarding null results
+            //retrieve and extract image data, discarding null results
             $.ajax({
                 type: 'GET',
                 dataType: 'JSON',
@@ -225,15 +230,15 @@
                     var imageCount = 0;
                     const cards = document.getElementsByClassName('cards')[0];
                     for (let i = 0; i < response.length; i++) {
-                        // if 24 images have been added, leave the function
+                        //if 24 images have been added, leave the function
                         if (imageCount == 24) {
                             break;
                         }
-                        // check if image exists
+                        //check if image exists
                         let image = response[i].show.image;
                         if (image != null && image.medium != null) {
                             imageCount++;
-                            // creates a li and img element to insert the image into, then appends to the document
+                            //creates a li and img element to insert the image into, then appends to the document
                             var card = document.createElement("li");
                             card.setAttribute("class", "card");
                             var cardData = document.createElement("img");
