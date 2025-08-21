@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1"/>
     <title>Renee Tran Living Spaces Code Challenge Submission</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- The styling for the page -->
@@ -26,18 +26,21 @@
 
         #main-content {
             max-width: 1620px;
-            margin: 85px auto;
+            margin: 100px auto;
         }
 
         .container {
             display: flex;
             border-radius: 6px;
             padding: 1rem;
-            justify-content: center;
+            gap: 0px 35px;
+            justify-content: space-between;
         }
 
         .stacked {
             flex-flow: column wrap;
+            justify-content: space-between;
+            padding: 0 !important;
         }
 
         img {
@@ -46,25 +49,19 @@
             height: auto;
         }
 
-        h2 {
-            font-size: 32px;
-            margin-bottom: 1rem;
-            padding: 1rem;
-        }
-
-        div.card-holder {
+        .card-holder {
             padding: 0 15px;
             margin: 0 auto;
-            box-sizing: border-box;
-            padding: 0;
-            margin: 0;
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            font-size: 32px;
         }
 
         .cards {
-            display: grid;
-            grid-auto-columns: 100%;
-            grid-column-gap: 10px;
-            grid-auto-flow: column;
+            display: flex;
             padding: 25px 0px;
             list-style: none;
             overflow-x: scroll;
@@ -74,35 +71,51 @@
         .card {
             display: flex;
             flex-direction: column;
-            padding: 20px;
-            background: white;
+            flex: 0 0 100%;
+            background: var(--white);
             border-radius: 6px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 15%);
             scroll-snap-align: start;
             transition: all 0.2s;
         }
 
-        .card .card-content {
-            margin: 20px 0;
-            max-width: 85%;
+        .card:not(:last-child) {
+            margin-right: 20px;
+            margin-left: 20px;
         }
 
         .cards::-webkit-scrollbar {
-            height: 12px;
+        height: 12px;
         }
 
         .cards::-webkit-scrollbar-thumb,
         .cards::-webkit-scrollbar-track {
-            border-radius: 92px;
+        border-radius: 92px;
         }
 
         .cards::-webkit-scrollbar-thumb {
-            background: var(--darkorange);
+        background: linear-gradient(to right, #FF5C00, #CB2DF4);;
         }
 
         .cards::-webkit-scrollbar-track {
-            background: var(--thumb);
+        background: #0B0B0B;
         }
+
+        @media (max-width: 580px) {
+            .card {
+                flex-basis: calc(50% - 10px);
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+        }
+
+        @media (min-width: 581px) {
+            .card {
+                flex-basis: calc(18% - 30px);
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -127,17 +140,10 @@
                     <img src="assets\2308_03_now_playing.jpg">
                 </div>
             </div>
-        </div>
-
         <div>
             <h2>Tomorrow's Schedule</h2>
             <div class="card-holder">
                 <ul class="cards">
-                    <li class="card">
-                        <div class="card-content">
-                                <p>haiii.</p>
-                        </div>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -149,16 +155,41 @@
             var date = new Date();
             date.setDate(date.getDate() + 1);
             var scheduleURL = 'https://api.tvmaze.com/schedule?country=US&date='+ date.toISOString().split('T')[0];
-            console.log(scheduleURL);
+
+            //retrieve and extract image data, discarding null results
             $.ajax({
                 type: 'GET',
                 dataType: 'JSON',
                 url: scheduleURL,
                 success: function(response) {
-                    console.log("success");
+                    var imageLinks = [];
+                    for (let i = 0; i < response.length; i++) {
+                        if (imageLinks.length == 24) {
+                            break;
+                        }
+                        let image = response[i].show.image;
+                        if (image != null && image.medium != null) {
+                            imageLinks.push(image.medium);
+                        }
+                    }
+                    // call function to insert images into cards
+                    populateCards(imageLinks);
                 }
             })
         });
+
+        function populateCards(images) {
+            const cards = document.getElementsByClassName('cards')[0];
+            for (let i = 0; i < images.length; i++) {
+                var card = document.createElement("li");
+                card.setAttribute("class", "card");
+                var cardData = document.createElement("img");
+                cardData.setAttribute("class", "card-content");
+                cardData.src = images[i];
+                card.appendChild(cardData);
+                cards.appendChild(card);
+            }
+        }
     </script>
 
     
