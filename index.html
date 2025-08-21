@@ -20,22 +20,22 @@
             left: 0;
             z-index: 100;
             width: 100%;
-            height: 58px;
+            height: 80px;
         }
 
         .navbar-items {
-            height: 58px;
+            height: 80px;
             display: flex;
             flex-flow: row wrap;
             justify-content: space-between;
             align-items: center;
-            max-width: 1620px; 
+            max-width: 1560px; 
             margin: auto;
         }
 
         #main-content {
             max-width: 1620px;
-            margin: 116px auto;
+            margin: 140px auto 0;
         }
 
         .container {
@@ -51,8 +51,12 @@
             justify-content: space-between;
         }
 
-        .spacing {
-            margin-bottom: 50px;
+        .spacing1 {
+            margin-bottom: 65px;
+        }
+
+        .spacing2 {
+            margin-bottom: 45px;
         }
 
         img {
@@ -68,8 +72,8 @@
         }
 
         h2 {
-            margin-bottom: 1rem;
-            font-size: 32px;
+            margin-bottom: 1.5rem;
+            font-size: 33px;
         }
 
         /* card styling referenced from https://webdesign.tutsplus.com/horizontal-scrolling-card-ui-flexbox-and-css-grid--cms-41922t */
@@ -92,12 +96,12 @@
             border-radius: 6px;
             scroll-snap-align: start;
             transition: all 0.2s;
-            margin-bottom: 45px;
+            margin-bottom: 60px;
         }
 
         .card:not(:last-child) {
-            margin-right: 20px;
-            margin-left: 20px;
+            margin-right: 16px;
+            margin-left: 16px;
         }
 
         .cards::-webkit-scrollbar {
@@ -118,7 +122,7 @@
         }
 
         .footer {
-            margin: 65px auto 45px;
+            margin: 60px auto 35px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -141,7 +145,7 @@
             }
 
             .card {
-                flex-basis: calc(50% - 10px);
+                flex-basis: calc(62% - 10px);
                 margin-bottom: 15px;
             }
 
@@ -151,17 +155,17 @@
             }
 
             h2 {
-                font-size: 24px;
+                font-size: 28px;
                 margin-bottom: 25px;
             }
 
             .footer {
-                font-size: 11px;
+                font-size: 28x;
             }
         }
 
         /* tablet screen */
-        @media (min-width:580px) and (max-width: 1620px) {
+        @media (min-width:581px) and (max-width: 1619px) {
 
             .navbar-items {
                 margin: auto 25px;
@@ -177,6 +181,10 @@
 
             .card {
                 flex-basis: calc(25% - 20px);
+            }
+
+            h2 {
+                font-size: 30px;
             }
         }
 
@@ -194,11 +202,11 @@
     <div id="navbar">
         <div class="navbar-items">
             <img src="assets\2308_gogglebox_logo.png">
-            <a style="font-size: 16px; font-weight: bold;">Sign in</a>
+            <a style="font-size: 18px; font-weight: bold;">Sign in</a>
         </div>
     </div>
     <div id="main-content">
-        <div class="container spacing">
+        <div class="container spacing1">
             <picture>
                 <source class="image" media="(max-width:580px)" srcset="assets\2308_mobile_hero.jpg">
                 <img src="assets\2308_desktop_hero.jpg">
@@ -207,7 +215,7 @@
 
         <div>
             <h2>Now Playing</h2>
-            <div class="container spacing">
+            <div class="container spacing2">
                 <div class="container">
                     <img src="assets\2308_01_now_playing.jpg">
                 </div>
@@ -237,7 +245,7 @@
             // prevent offset from conversion to UTC time
             date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
             date.setDate(date.getDate() + 1);
-            
+
             var scheduleURL = 'https://api.tvmaze.com/schedule?country=US&date='+ date.toISOString().split('T')[0];
             console.log(scheduleURL);
 
