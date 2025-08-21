@@ -12,7 +12,6 @@
             font-family: Arial;
             transition: all 0.2s;
         }
-
         #navbar {
             background-color: #000;
             position: fixed;
@@ -22,7 +21,6 @@
             width: 100%;
             height: 80px;
         }
-
         .navbar-items {
             height: 80px;
             display: flex;
@@ -32,12 +30,10 @@
             max-width: 1560px; 
             margin: auto;
         }
-
         #main-content {
             max-width: 1620px;
             margin: 140px auto 0;
         }
-
         .container {
             display: flex;
             border-radius: 6px;
@@ -45,42 +41,34 @@
             justify-content: space-between;
             flex-shrink: 2;
         }
-
         .stacked {
             flex-flow: column wrap;
             justify-content: space-between;
         }
-
         .spacing1 {
             margin-bottom: 65px;
         }
-
         .spacing2 {
             margin-bottom: 45px;
         }
-
         img {
             max-width: 100%;
             border-radius: 6px;
             height: auto;
         }
-
         .image {
             max-width: 100%;
             border-radius: 6px;
             height: auto;
         }
-
         h2 {
             margin-bottom: 1.5rem;
             font-size: 33px;
         }
-
         /* card styling referenced from https://webdesign.tutsplus.com/horizontal-scrolling-card-ui-flexbox-and-css-grid--cms-41922t */
         .card-holder {
             margin: 0 auto;
         }
-
         .cards {
             display: flex;
             padding: 25px 0px;
@@ -88,7 +76,6 @@
             overflow-x: scroll;
             scroll-snap-type: x mandatory;
         }
-
         .card {
             display: flex;
             flex-direction: column;
@@ -98,29 +85,24 @@
             transition: all 0.2s;
             margin-bottom: 60px;
         }
-
         .card:not(:last-child) {
             margin-right: 16px;
             margin-left: 16px;
         }
-
+        /* webkit scrollbar is outdated, but I used it to better follow the reference. It is supported on most web browsers, but not all: https://caniuse.com/?search=webkit-scrollbar */
         .cards::-webkit-scrollbar {
             height: 12px;
         }
-
         .cards::-webkit-scrollbar-thumb,
         .cards::-webkit-scrollbar-track {
             border-radius: 92px;
         }
-
         .cards::-webkit-scrollbar-thumb {
             background: linear-gradient(to right, #FF5C00, #CB2DF4);;
         }
-
         .cards::-webkit-scrollbar-track {
             background: #0B0B0B;
         }
-
         .footer {
             margin: 60px auto 35px;
             display: flex;
@@ -134,31 +116,25 @@
             .navbar-items {
                 margin: auto 25px;
             }
-
             #main-content {
                 margin: 95px 25px;
             }
-
             .container {
                 flex-flow: column wrap;
                 gap: 25px;
             }
-
             .card {
                 flex-basis: calc(62% - 10px);
                 margin-bottom: 15px;
             }
-
             .cards {
                 margin-top: 0;
                 padding-top: 0;
             }
-
             h2 {
                 font-size: 28px;
                 margin-bottom: 25px;
             }
-
             .footer {
                 font-size: 28x;
             }
@@ -187,17 +163,14 @@
                 font-size: 30px;
             }
         }
-
         /* desktop screen */
         @media (min-width: 1620px) {
             .card {
                 flex-basis: calc(17% - 30px);
             }
         }
-
     </style>
 </head>
-
 <body>
     <div id="navbar">
         <div class="navbar-items">
@@ -212,7 +185,6 @@
                 <img src="assets\2308_desktop_hero.jpg">
             </picture>
         </div>
-
         <div>
             <h2>Now Playing</h2>
             <div class="container spacing2">
@@ -232,24 +204,19 @@
             </div>
         </div>
     </div>
-
     <footer class="footer">
         <p>@ Gogglebox 2025 All Rights Reserved.</p>
     </footer>
-
     <script>
         $(document).ready(function() {
             // get tomorrow's date and populate schedule
             var date = new Date();
-
             // prevent offset from conversion to UTC time
             date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
             date.setDate(date.getDate() + 1);
-
             var scheduleURL = 'https://api.tvmaze.com/schedule?country=US&date='+ date.toISOString().split('T')[0];
             console.log(scheduleURL);
-
-            //retrieve and extract image data, discarding null results
+            // retrieve and extract image data, discarding null results
             $.ajax({
                 type: 'GET',
                 dataType: 'JSON',
@@ -257,13 +224,11 @@
                 success: function(response) {
                     var imageCount = 0;
                     const cards = document.getElementsByClassName('cards')[0];
-
                     for (let i = 0; i < response.length; i++) {
                         // if 24 images have been added, leave the function
                         if (imageCount == 24) {
                             break;
                         }
-
                         // check if image exists
                         let image = response[i].show.image;
                         if (image != null && image.medium != null) {
