@@ -15,8 +15,6 @@
         #navbar {
             background-color: #000;
             position: fixed;
-            display: block;
-            margin: 0 0 1rem;
             top: 0;
             left: 0;
             z-index: 100;
@@ -24,15 +22,24 @@
             height: 58px;
         }
 
+        .navbar-items {
+            height: 58px;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1620px; 
+            margin: auto;
+        }
+
         #main-content {
             max-width: 1620px;
-            margin: 100px auto;
+            margin: 116px auto;
         }
 
         .container {
             display: flex;
             border-radius: 6px;
-            padding: 1rem;
             gap: 0px 35px;
             justify-content: space-between;
         }
@@ -40,7 +47,10 @@
         .stacked {
             flex-flow: column wrap;
             justify-content: space-between;
-            padding: 0 !important;
+        }
+
+        .spacing {
+            margin-bottom: 50px;
         }
 
         img {
@@ -50,13 +60,11 @@
         }
 
         .card-holder {
-            padding: 0 15px;
             margin: 0 auto;
         }
 
         h2 {
             margin-bottom: 1rem;
-            padding: 1rem;
             font-size: 32px;
         }
 
@@ -76,6 +84,7 @@
             border-radius: 6px;
             scroll-snap-align: start;
             transition: all 0.2s;
+            margin-bottom: 45px;
         }
 
         .card:not(:last-child) {
@@ -100,13 +109,26 @@
         background: #0B0B0B;
         }
 
+        .footer {
+            margin: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+        }
+
         @media (max-width: 580px) {
             .card {
                 flex-basis: calc(50% - 10px);
+                margin-bottom: 15px;
             }
 
             h2 {
                 font-size: 24px;
+            }
+
+            .footer {
+                font-size: 11px;
             }
         }
 
@@ -120,11 +142,13 @@
 </head>
 <body>
     <div id="navbar">
-        <img src="assets\2308_gogglebox_logo.png">
-        <a style="float: right;">Sign in</a>
+        <div class="navbar-items">
+            <img src="assets\2308_gogglebox_logo.png">
+            <a style="font-size: 16px; font-weight: bold;">Sign in</a>
+        </div>
     </div>
     <div id="main-content">
-        <div class="container">
+        <div class="container spacing">
             <picture>
                 <source media="(max-width:580px)" srcset="assets\2308_mobile_hero.jpg">
                 <img src="assets\2308_desktop_hero.jpg">
@@ -133,7 +157,7 @@
 
         <div>
             <h2>Now Playing</h2>
-            <div class="container">
+            <div class="container spacing">
                 <img src="assets\2308_01_now_playing.jpg">
                 <div class="container stacked">
                     <img src="assets\2308_02_now_playing.jpg">
@@ -148,6 +172,10 @@
             </div>
         </div>
     </div>
+
+    <footer class="footer">
+        <p>@ Gogglebox 2025 All Rights Reserved.</p>
+    </footer>
 
     <script>
         $(document).ready(function() {
