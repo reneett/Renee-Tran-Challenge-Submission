@@ -1,2 +1,2 @@
-### Instructions to run
-Access through GitHub Pages link
+### Instructions to access
+link: https://reneett.github.io/Renee-Tran-Challenge-Submission/
